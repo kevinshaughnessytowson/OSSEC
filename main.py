@@ -1,6 +1,7 @@
 #!/bin/python
 
 import socks
+import socket
 
 #choose a scan profile, this could be a useful feature to avoid detection by failed connection attempts let me know what you think
 scan_profile = ["web", "database", "mail", "workstation"]
@@ -19,9 +20,18 @@ top_ports = {7:"Echo", 20:"FTP Data", 21:"FTP Service", 22:"SSH", 23:"Telnet", 2
  
  def choose_port():
 	
-
+def connect(conn):
+	port = choose_port()
+	try()
 
 #set proxy for python to use, this will be a tor proxy so tor must be setup for it to work
 def main():
 	target_socket = socks.socksocket()
 	s.setproxy(socks.PROXY_TYPE_SOCKS5, 'localhost', 9050)
+
+	target = input("Please enter the IP address of the target you want to scan: ")
+	#gets the hostname of the IP address, this will make the traffic look more normal since the connections will use a hostname and not an IP address
+	named_target = socket.gethostbyaddr(target)
+	
+	#create a socket to perform connections
+	connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
