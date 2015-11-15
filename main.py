@@ -4,7 +4,11 @@
 import socks
 import socket
 import scapy.all as scapy
+import MySQLdb as sql
+import re
 
+db = sql.connect(host="localhost", user="root", passwd="toor", db="scan")
+cursor = db.cursor()
 
 #choose a scan profile, this could be a useful feature to avoid detection by failed connection attempts let me know what you think
 scan_profile = ["web", "database", "mail", "workstation"]
@@ -27,8 +31,11 @@ def connect(scapSstr, ip, hostn=""):
 	port = choose_port()
 	if hostn != "":
 		try:	#send SYN packet and get the response, this is where the meat of the scanner will be where we send the spoofed packets
-			syn = IP(dst=hostn) / TCP(dport=port), flags='S')
-			syn_ack = sr1(syn)
+			#syn = IP(dst=hostn) / TCP(dport=port), flags='S')
+			cursor.execute("""SELECT packet_format FROM services WHERE port=7""")
+			cmd = cursor.fetchone()
+			cmd = re.findall(r`"([^']*)"`, cmd)
+			syn_ack = exec(cmd)
 
 #set proxy for python to use, this will be a tor proxy so tor must be setup for it to work
 def main():

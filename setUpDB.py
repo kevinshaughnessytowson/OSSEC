@@ -16,12 +16,7 @@ except:
 
 cursor.execute('INSERT INTO services (`port`, `packet_format`) VALUES (7, "sr1(IP(dst=?)/ICMP())")')
 cursor.execute('INSERT INTO services (`port`, `packet_format`) VALUES (21, "sr1(IP(dst=?)/ICMP())")')
-#create_table = ("CREATE TABLE `services` ("
-#    "  `port` int(8) NOT NULL,"
-#    "  `packet_format` text NOT NULL,"
-#    "  PRIMARY KEY (`port`)"
-#    ") ENGINE=InnoDB")
+
+db.commit()
 
 
-
-#cursor.execute(create_table)
